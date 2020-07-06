@@ -4,9 +4,9 @@ Developed by Fernando Menendez
 
 fermenendez77@gmail.com
 
-### This app was maded using MVP as a Main Arquitecture pattern. The are a couple of test in order to show either Component can be tested. 
+### This app was maded using MVP as a Main Arquitecture pattern. There are a couple of tests in order to show that every Component can be tested. 
 
-* For delete a subrredit, swipe left-right and press delete (Apple behaviour for deleting element on tableview)
+* To delete a subrredit, swipe left-right and press delete (Apple behaviour for deleting element on tableview)
 * Swipe-up to reload the list
 * Supports Dark Mode!
 
