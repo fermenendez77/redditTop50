@@ -14,6 +14,7 @@ protocol TopTableView : class {
     func appendElements(fromRow from : Int, toRow to : Int)
     func showDetail()
     func reloadCell(at indexPath : IndexPath)
+    func showError()
 }
 
 class TopTableViewController: UITableViewController {
@@ -26,6 +27,16 @@ class TopTableViewController: UITableViewController {
         loadingIndicator.style = .medium
         loadingIndicator.startAnimating();
         alert.view.addSubview(loadingIndicator)
+        return alert
+    }()
+    
+    lazy var errorAlert : UIAlertController = {
+        
+        let alert = UIAlertController(title: "Error", message: "There is an error Fetching the data", preferredStyle: .alert)
+        let action = UIAlertAction(title: "Try Again", style: .default) { [weak self] alert in
+            self?.presenter?.viewDidLoad()
+        }
+        alert.addAction(action)
         return alert
     }()
     
@@ -112,6 +123,11 @@ class TopTableViewController: UITableViewController {
 }
 
 extension TopTableViewController : TopTableView {
+    
+    func showError() {
+        present(errorAlert, animated: true, completion: nil)
+    }
+    
     
     func reloadCell(at indexPath: IndexPath) {
         tableView.reloadRows(at: [indexPath], with: .fade)

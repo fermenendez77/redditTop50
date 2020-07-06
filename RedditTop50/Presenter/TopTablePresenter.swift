@@ -10,7 +10,7 @@ import Foundation
 import UIKit.UIImage
 
 protocol TopTablePresenter : class {
-    
+    var subreddits : [Subreddit] { get }
     var requestedItems : Int { get }
     var receivedItemsCount : Int { get }
     func viewDidLoad()
@@ -32,13 +32,13 @@ class TopTablePresenterImp : TopTablePresenter {
         self.view = view
     }
     
-    public var subreddits : [Subreddit] = []
+    internal var subreddits : [Subreddit] = []
     public var receivedItemsCount : Int {
         return subreddits.count
     }
     
-    var pendingImagesOperations : [IndexPath : ImageDownloaderOperation] = [:]
-    var images : [IndexPath : UIImage] = [:]
+    internal var pendingImagesOperations : [IndexPath : ImageDownloaderOperation] = [:]
+    internal var images : [IndexPath : UIImage] = [:]
     var imageQueue : OperationQueue = OperationQueue()
 
     var lastId : String?
@@ -55,11 +55,10 @@ class TopTablePresenterImp : TopTablePresenter {
         guard let cellData = subreddit.data else {
             return
         }
-        cell.configure(title: cellData.title!)
-        cell.configure(author: cellData.author!)
-        cell.configure(created: String(cellData.created!))
-        cell.configure(points: String(indexPath.row))
-        //cell.configure(points: String(cellData.score!))
+        cell.configure(title: cellData.title ?? "No Title")
+        cell.configure(author: cellData.author ?? "No Author")
+        cell.configure(created: formatCreatedString(with: cellData))
+        cell.configure(points: String(cellData.score ?? 0))
         
         if let image = images[indexPath] {
             cell.hideLoader()
@@ -81,6 +80,19 @@ class TopTablePresenterImp : TopTablePresenter {
             }
             pendingImagesOperations[indexPath] = operation
             imageQueue.addOperation(operation)
+        }
+    }
+    
+    func formatCreatedString(with subredditData : SubredditData) -> String {
+       
+        let createdDate = Date(timeIntervalSince1970: Double(subredditData.createdUTC!))
+        let now = Date()
+        let difference = Calendar.current.dateComponents([.year, .month, .day, .hour, .minute], from: createdDate, to: now)
+        
+        if difference.minute! >= 1{
+            return String(describing: difference.minute!) + " min ago"
+        } else {
+            return String(describing: difference.hour!) + " hour ago"
         }
     }
     
@@ -129,7 +141,7 @@ extension TopTablePresenterImp : TopDataProviderDelegate {
     }
     
     func error(error: ErrorData) {
-        
+        view?.showError()
     }
 
 }

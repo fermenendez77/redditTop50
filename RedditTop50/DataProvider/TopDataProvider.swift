@@ -32,14 +32,14 @@ class TopDataProviderImp : TopDataProvider {
                                   returnType: TopResponse.self,
                                   completionHandler: { [weak self] topResponse in
                                     guard let subReddits = topResponse.data?.children,
-                                          let lastElement = topResponse.data?.after else {
+                                        let lastElement = topResponse.data?.after else {
                                             self?.delegate?.error(error: .badFormatError)
                                             return
                                     }
                                     self?.delegate?.success(data: subReddits, last: lastElement)
-                                  },
+            },
                                   errorHandler: { [weak self] error in
                                     self?.delegate?.error(error: error)
-                                  })
+        })
     }
 }

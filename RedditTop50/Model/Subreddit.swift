@@ -34,7 +34,8 @@ struct SubredditData: Codable {
     let created: Int?
     let url: String?
     let title: String?
-    let createdUTC, ups, numComments: Int?
+    let createdUTC : Int64?
+    let ups, numComments: Int?
     let visited: Bool?
 
     enum CodingKeys: String, CodingKey {
