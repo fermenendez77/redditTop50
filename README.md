@@ -8,6 +8,7 @@ fermenendez77@gmail.com
 
 * For delete a subrredit, swipe left-right and press delete (Apple behaviour for deleting element on tableview)
 * Swipe-up to reload the list
+* Supports Dark Mode!
 
 Screenshots
 
