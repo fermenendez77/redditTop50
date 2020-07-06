@@ -39,6 +39,7 @@ class TopTablePresenterImp : TopTablePresenter {
     
     internal var pendingImagesOperations : [IndexPath : ImageDownloaderOperation] = [:]
     internal var images : [IndexPath : UIImage] = [:]
+    internal var readedIds : [String] = []
     var imageQueue : OperationQueue = OperationQueue()
 
     var lastId : String?
@@ -59,7 +60,9 @@ class TopTablePresenterImp : TopTablePresenter {
         cell.configure(author: cellData.author ?? "No Author")
         cell.configure(created: formatCreatedString(with: cellData))
         cell.configure(points: String(cellData.score ?? 0))
-        
+        if let id = cellData.id {
+            cell.configure(readed: readedIds.contains(id))
+        }
         if let image = images[indexPath] {
             cell.hideLoader()
             cell.configure(image: image)
@@ -117,6 +120,10 @@ class TopTablePresenterImp : TopTablePresenter {
     
     func selectedRow(at indexPath: IndexPath) {
         let subreddit = subreddits[indexPath.row]
+        if let id = subreddit.data?.id {
+            readedIds.append(id)
+        }
+        readedIds.append(subreddit.data!.id!)
         selectionDelegate?.selected(subreddit: subreddit)
         view?.showDetail()
     }

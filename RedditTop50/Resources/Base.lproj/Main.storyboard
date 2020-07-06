@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="15400" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="sPx-rj-JWd">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="15505" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="sPx-rj-JWd">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15404"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15510"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -114,6 +114,12 @@
                                             <nil key="textColor"/>
                                             <nil key="highlightedColor"/>
                                         </label>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="H2a-cE-UA8">
+                                            <rect key="frame" x="348.5" y="9" width="35.5" height="17"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                            <nil key="textColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
                                     </subviews>
                                     <constraints>
                                         <constraint firstItem="L3n-79-w4e" firstAttribute="leading" secondItem="hed-Z9-Ve0" secondAttribute="leading" constant="55.5" id="0Wl-vH-Ktj"/>
@@ -129,14 +135,17 @@
                                         <constraint firstItem="cqi-uH-JUJ" firstAttribute="leading" secondItem="ndY-2w-unp" secondAttribute="trailing" constant="15" id="aME-Qr-HQR"/>
                                         <constraint firstAttribute="bottom" secondItem="sKp-64-APw" secondAttribute="bottom" constant="61" id="ibh-tg-w7H"/>
                                         <constraint firstItem="L3n-79-w4e" firstAttribute="top" secondItem="hed-Z9-Ve0" secondAttribute="top" constant="10" id="jLl-Dh-2VF"/>
+                                        <constraint firstItem="cqi-uH-JUJ" firstAttribute="top" secondItem="H2a-cE-UA8" secondAttribute="bottom" constant="9" id="m5B-aA-Bqg"/>
                                         <constraint firstItem="ndY-2w-unp" firstAttribute="leading" secondItem="L3n-79-w4e" secondAttribute="trailing" constant="7.5" id="n4A-OU-Rc5"/>
                                         <constraint firstAttribute="trailing" secondItem="cqi-uH-JUJ" secondAttribute="trailing" constant="10" id="plf-qK-yN0"/>
                                         <constraint firstAttribute="bottomMargin" secondItem="ndY-2w-unp" secondAttribute="bottom" constant="10" id="q1J-nJ-3Ro"/>
+                                        <constraint firstAttribute="trailing" secondItem="H2a-cE-UA8" secondAttribute="trailing" constant="30" id="q65-Pp-3Dt"/>
                                     </constraints>
                                 </tableViewCellContentView>
                                 <connections>
                                     <outlet property="authorLabel" destination="Fxc-QK-xxU" id="f5o-pS-SHf"/>
                                     <outlet property="pointsLabel" destination="sKp-64-APw" id="qcU-lg-ij1"/>
+                                    <outlet property="statusLabel" destination="H2a-cE-UA8" id="hpR-0s-RAM"/>
                                     <outlet property="thumbnailImageView" destination="cqi-uH-JUJ" id="5YI-NW-ztj"/>
                                     <outlet property="timeCreatedLabel" destination="tE4-3r-mRb" id="bv2-Ea-Fa8"/>
                                     <outlet property="titleLabel" destination="ndY-2w-unp" id="9g5-mb-guL"/>

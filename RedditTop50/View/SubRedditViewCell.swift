@@ -32,6 +32,7 @@ class SubRedditViewCell : UITableViewCell {
     }
     @IBOutlet weak var pointsLabel: UILabel!
     @IBOutlet weak var timeCreatedLabel: UILabel!
+    @IBOutlet weak var statusLabel: UILabel!
     
     func configure(author : String) {
         authorLabel.text = author
@@ -62,6 +63,16 @@ class SubRedditViewCell : UITableViewCell {
     
     func configure(image : UIImage) {
         thumbnailImageView.image = image
+    }
+    
+    func configure(readed: Bool?) {
+        if let readed = readed, readed {
+            statusLabel.text = "Readed"
+            statusLabel.textColor = UIColor.black
+        } else {
+            statusLabel.text = "Not Readed"
+            statusLabel.textColor = UIColor.systemRed
+        }
     }
     
 }
