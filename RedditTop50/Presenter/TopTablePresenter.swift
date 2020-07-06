@@ -11,6 +11,7 @@ import UIKit.UIImage
 
 protocol TopTablePresenter : class {
     
+    var requestedItems : Int { get }
     var receivedItemsCount : Int { get }
     func viewDidLoad()
     func configure(cell : SubRedditViewCell, atIndexPath indexPath : IndexPath)
@@ -41,7 +42,8 @@ class TopTablePresenterImp : TopTablePresenter {
     var imageQueue : OperationQueue = OperationQueue()
 
     var lastId : String?
-    let requestItems = 20
+    public var requestedItems = 0
+    public let requestItems = 10
     
     func viewDidLoad() {
         dataProvider.delegate = self
@@ -56,7 +58,8 @@ class TopTablePresenterImp : TopTablePresenter {
         cell.configure(title: cellData.title!)
         cell.configure(author: cellData.author!)
         cell.configure(created: String(cellData.created!))
-        cell.configure(points: String(cellData.score!))
+        cell.configure(points: String(indexPath.row))
+        //cell.configure(points: String(cellData.score!))
         
         if let image = images[indexPath] {
             cell.hideLoader()
@@ -88,12 +91,16 @@ class TopTablePresenterImp : TopTablePresenter {
     func deleteAll() {
         subreddits.removeAll()
         lastId = nil
+        requestedItems = 0
         images.removeAll()
         view?.loadElements()
     }
     
     func fetchData() {
-        dataProvider.requestData(nextElements: requestItems, after: lastId)
+        if (requestedItems < 50) {
+            requestedItems += requestItems
+            dataProvider.requestData(nextElements: requestItems, after: lastId)
+        }
     }
     
     func selectedRow(at indexPath: IndexPath) {

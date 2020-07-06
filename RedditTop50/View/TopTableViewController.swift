@@ -36,7 +36,6 @@ class TopTableViewController: UITableViewController {
         super.viewDidLoad()
         configureNavBar()
         configureRefreshControl()
-        tableView.prefetchDataSource = self
         showProgressFetchingDataAlert()
         presenter?.viewDidLoad()
     }
@@ -104,13 +103,9 @@ class TopTableViewController: UITableViewController {
         tableView.deselectRow(at: indexPath, animated: false)
         presenter?.selectedRow(at: indexPath)
     }
-}
-
-extension TopTableViewController : UITableViewDataSourcePrefetching {
     
-    func tableView(_ tableView: UITableView, prefetchRowsAt indexPaths: [IndexPath]) {
-        
-        if (indexPaths.last!.row < 4) {
+    override func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+        if indexPath.row + 1 == presenter!.requestedItems {
             presenter?.fetchData()
         }
     }
